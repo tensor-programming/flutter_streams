@@ -38,7 +38,7 @@ class PhotoListState extends State<PhotoList> {
     load(streamController);
   }
 
-  load(StreamController sc) async {
+  load(StreamController<Photo> sc) async {
     String url = "https://jsonplaceholder.typicode.com/photos";
     var client = new http.Client();
 
@@ -51,7 +51,7 @@ class PhotoListState extends State<PhotoList> {
         .transform(json.decoder)
         .expand((e) => e)
         .map((map) => Photo.fromJsonMap(map))
-        .pipe(streamController);
+        .pipe(sc);
   }
 
   @override
